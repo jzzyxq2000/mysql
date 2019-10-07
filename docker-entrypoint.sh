@@ -206,5 +206,4 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 		echo
 	fi
 fi
-echo "$@">>/entrypoint.log
 exec "$@"
