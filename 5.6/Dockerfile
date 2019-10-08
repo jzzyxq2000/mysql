@@ -4,6 +4,7 @@ FROM debian:stretch-slim
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 
 RUN apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr net-tools vim && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y net-tools vim
 
 # add gosu for easy step-down from root
 ENV GOSU_VERSION 1.7
