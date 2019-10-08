@@ -3,7 +3,7 @@ FROM debian:stretch-slim
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 
-RUN apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr vim net-tools && rm -rf /var/lib/apt/lists/*
 
 # add gosu for easy step-down from root
 ENV GOSU_VERSION 1.7
