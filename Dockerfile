@@ -20,7 +20,7 @@ RUN set -x \
 	&& gosu nobody true \
 	&& apt-get purge -y --auto-remove ca-certificates wget
 
-RUN mkdir /docker-entrypoint-initdb.d
+RUN mkdir /docker-entrypoint-initdb.d && mkdir /etc/mysql/mysql.define.conf.d/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 # for MYSQL_RANDOM_ROOT_PASSWORD
@@ -46,7 +46,8 @@ RUN set -ex; \
 ENV MYSQL_MAJOR 5.6
 ENV MYSQL_VERSION 5.6.45-1debian9
 
-RUN echo "deb http://repo.mysql.com/apt/debian/ stretch mysql-${MYSQL_MAJOR}" > /etc/apt/sources.list.d/mysql.list
+RUN echo "deb http://repo.mysql.com/apt/debian/ stretch mysql-${MYSQL_MAJOR}" > /etc/apt/sources.list.d/mysql.list \
+    echo "!includedir /etc/mysql/mysql.define.conf.d/" >> /etc/mysql/my.cnf
 
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
 # also, we set debconf keys to make APT a little quieter
