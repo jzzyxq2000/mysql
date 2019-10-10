@@ -68,7 +68,7 @@ RUN { \
 # don't reverse lookup hostnames, they are usually another container
 	&& echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/conf.d/docker.cnf
 
-RUN apt-get update && apt-get install -y vim net-tools
+RUN apt-get update && apt-get install -y vim net-tools iputils-ping
 
 VOLUME /var/lib/mysql
 
